@@ -1,0 +1,232 @@
+import statistics
+import math
+import fractions
+def primfaktoren(n):
+    faktoren = []
+    z = n
+    while z > 1:
+        # bestimme den kleinsten Primfaktor p von z
+        i = 2
+        gefunden = False
+        while i * i <= n and gefunden == False:
+            if z % i == 0:
+                gefunden = True
+                p = i
+            else:
+                i = i + 1
+        if not gefunden:
+            p = z
+        faktoren = faktoren + [p]
+        z = z / p
+    return faktoren
+# Begruessungstext
+print("Herzlich Willkommen bei Version 0.3 der interaktiven Formelsammlung!")
+print("Sie koennen hier Formeln aus verschiedenen Gebieten der Mathematik anzeigen und anwenden")
+while True:
+    print("Waehlen Sie eines der folgenden Gebiete")
+    print("1 Geometrie")
+    print("2 Stochastik")
+    print("3 Zahlentheorie")
+    print("4 Algebra")
+    # Wahlmethode
+    wahl = int(input())
+    if wahl == 1:
+        print("Geometrie:")
+        print("1 Figuren und Koerper")
+        print("2 Trigonometrie")
+        print("3 Analytische Geometrie")
+        wahl = int(input())
+        if wahl == 1:
+            print("Geometrie:")
+            print("1 Kreisberechnung")
+            print("2 Zylinder")
+            print("3 Kegel")
+            print("4 Kugel")
+            wahl = int(input())
+            if wahl == 1:
+                print("Sie haben Kreisberechnung gewaehlt!")
+                print("Radius?")
+                r = float(input())
+                print("Winkel?")
+                w = float(input())
+                Kreisflaeche = math.pi * r ** 2
+                Kreisumfang = math.pi * r * 2
+                Kreisbogen = math.pi * 2 * r * (w / 180.0)
+                Kreisausschnit = math.pi * r ** 2 * (w / 360.0)
+                print("Kreisflache:", Kreisflaeche, "qcm")
+                print("Kreisumfang", Kreisumfang, "cm")
+                print("Kreisbogen", Kreisbogen, "cm")
+                print("Kreisausschnit", Kreisausschnit, "qcm")
+            elif wahl == 2:
+                print("Sie haben Zylinder gewaehlt!")
+                print("Durchmesser des Zylinders?")
+                d = float(input())
+                print("Hoehe des Zylinders?")
+                h = float(input())
+                uBoden = d * math.pi
+                fBoden = math.pi * (d / 2) ** 2
+                fMantel = uBoden * h
+                fGesamt = 2 * fBoden + fMantel
+                v = fBoden * h
+                print("Umfang des Zylinders:", uBoden, "cm")
+                print("Flaeche des Bodens:", fBoden, "qcm")
+                print("Mantelflaeche:", fMantel, "qcm")
+                print("Gesamtflaeche:", fGesamt, "qcm")
+                print("Volumen des Zylinders:", v, "ccm")
+            elif wahl == 3:
+                print("Sie haben Kegel gewaehlt!")
+                print("Radius?")
+                r = float(input())
+                print("Hoehe?")
+                h = float(input())
+                bKegel = 2 * math.pi * r
+                fKegel = 0.5 * bKegel * r
+                sKegel = math.sqrt(r ** 2 + h ** 2)
+                mKegel = math.pi * r * sKegel
+                vKegel = (1.0 / 3.0) * fKegel * h
+                print("Mantellinie:", sKegel, "cm")
+                print("Mantelflaeche:", mKegel, "qcm")
+                print("Grundflaeche:", fKegel, "qcm")
+                print("Volumen:", vKegel, "ccm")
+            elif wahl == 4:
+                print("Sie haben Kugel gewaehlt!")
+                r = float(input())
+                v = 4 / 3 * math.pi * r ** 3
+                print("Volumen:", v, "ccm")
+        elif wahl == 2:
+            print("Trigonometrie:")
+            print("1 Sinussatz")
+            print("2 Cosinussatz")
+            print("3 Pythagoras")
+            print("4 Winkelberechnung einfach")
+            print("5 Winkelberechnung komplex")
+            wahl = int(input())
+            if wahl == 3:
+                print("Sie haben Pythagoras gewaehlt!")
+                print("Gegenkathete?")
+                g = input()
+                print("Hypothenuse?")
+                h = input()
+                print("Ankathete?")
+                a = input()
+                if g == (""):
+                    ht = float(h)
+                    ak = float(a)
+                    gk = math.sqrt(ht * ht - ak * ak)
+                    print("Gegenkathete:", gk)
+                    print("Ankathete:", ak)
+                    print("Hypothenuse:", ht)
+                elif h == (""):
+                    gk = float(g)
+                    ak = float(a)
+                    ht = math.sqrt(gk * gk + ak * ak)
+                    print("Gegenkathete:", gk)
+                    print("Ankathete:", ak)
+                    print("Hypothenuse:", ht)
+                elif a == (""):
+                    gk = float(g)
+                    ht = float(h)
+                    ak = math.sqrt(ht * ht - gk * gk)
+                    print("Gegenkathete:", gk)
+                    print("Ankathete:", ak)
+                    print("Hypothenuse:", ht)
+                else:
+                    print("Gegenkathete:", gk)
+                    print("Ankathete:", ak)
+                    print("Hypothenuse:", ht)
+            if wahl == 4:
+                print("Sie haben Winkelberechnung einfach gewaehlt!")
+                print("Alpha?")
+                a = input()
+                if a == (""):
+                    print("Beta?")
+                    b = int(input())
+                    print("Gamma?")
+                    y = int(input())
+                    a = 180 - b - y
+                    print("Alpha:", a, "Grad")
+                else:
+                    a = int(a)
+                    print("Beta?")
+                    b = input()
+                    if b == (""):
+                        print("Gamma?")
+                        y = int(input())
+                        b = 180 - a - y
+                        print("Beta:", b, "Grad")
+                    else:
+                        b = int(b)
+                        print("Gamma?")
+                        y = input()
+                        if y == (""):
+                            y = 180 - a - b
+                            print("Gamma:", y, "Grad")
+            if wahl == 5:
+                print("Sie haben Winkelberechnung komplex gewaehlt!")
+                gk = float(input())
+                ak = float(input())
+                print("Hypothenuse?")
+                ht = float(input())
+                a = math.asin(gk / ht) * 180 / math.pi
+                b = math.acos(gk / ht) * 180 / math.pi
+                c = math.atan(gk / ak) * 180 / math.pi
+                print("Alpha:", a)
+                print("Beta_", b)
+                print("Gamma:", c)
+    elif wahl == 2:
+        print("Stochastik")
+        print("1 Bernoulli-Kette")
+    elif wahl == 3:
+        print("Zahlentheorie")
+        print("1 Groesster gemeinsamer Teiler")
+        print("2 Primfaktorzerlegung")
+        print("3 Mittelwert")
+        print("4 Median")
+        wahl = int(input())
+        if wahl == 1:
+            print("GgT:")
+            print("Geben Sie den Zaehler ein:")
+            z = int(input())
+            print("Geben Sie den Nenner ein:")
+            n = int(input())
+            print("GgT:", fractions.gcd(z, n))
+        if wahl == 2:
+            print("Primfaktorzerlegung:")
+            print("Geben Sie eine ganze Zahl ein:")
+            n = int(input())
+            print(primfaktoren(n))
+        if wahl == 3:
+            print("Mittelwert:")
+            s = input("Zahlen?")
+            numbers = map(int, s.split())
+            print(statistics.mean(numbers))
+        if wahl == 4:
+            print("Median:")
+            s = input("Zahlen?")
+            numbers = map(int, s.split())
+            print(statistics.median(numbers))
+    elif wahl == 4:
+        print("Algebra:")
+        print("1 Lineare Gleichungen")
+        wahl = int(input())
+        if wahl == 1:
+            print("Sie haben Lineare Gleichungen gewaehlt!")
+            print("1 Schema: c = a + x")
+            print("2 Schema: c = a * x")
+            print("3 Schema: c = a / x")
+            wahl = int(input())
+            if wahl == 1:
+                c = float(input("C?"))
+                a = float(input("A?"))
+                x = c - a
+                print("X = ", x)
+            if wahl == 2:
+                c = float(input("C?"))
+                a = float(input("A?"))
+                x = c / a
+                print("X = ", x)
+            if wahl == 3:
+                c = float(input("C?"))
+                a = float(input("A?"))
+                x = c * a
+                print("X = ", x)
